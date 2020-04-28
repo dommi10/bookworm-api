@@ -12,8 +12,8 @@ users.post("/", (req, res) => {
   user.setPassword(password);
   user
     .save()
-    .then((user) => {
-      res.status(200).json({ user: user.toAuthJSON() });
+    .then((newUser) => {
+      res.status(200).json({ user: newUser.toAuthJSON() });
     })
     .catch((error) => {
       res.status(400).json({ errors: parseErrors(error.errors) });
