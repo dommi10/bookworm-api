@@ -4,12 +4,16 @@ import cors from "cors";
 import mongoose from "mongoose";
 import auth from './routes/auth';
 import bodyParser from "body-parser";
+import dotenv from "dotenv"
+
+
+dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect("mongodb://localhost/bookworm", {
+mongoose.connect(process.env.MONGODB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
