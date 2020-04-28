@@ -2,10 +2,9 @@ import express from "express";
 import path from "path";
 import cors from "cors";
 import mongoose from "mongoose";
-import auth from './routes/auth';
+import auth from "./routes/auth";
 import bodyParser from "body-parser";
-import dotenv from "dotenv"
-
+import dotenv from "dotenv";
 
 dotenv.config();
 
@@ -16,10 +15,10 @@ app.use(bodyParser.json());
 mongoose.connect(process.env.MONGODB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useCreateIndex: true,
 });
 
-app.use('/api/auth', auth);
-
+app.use("/api/auth", auth);
 
 app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
