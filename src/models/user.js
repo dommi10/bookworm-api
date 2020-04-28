@@ -11,15 +11,15 @@ const schema = new mongoose.Schema(
   { timestamps: true }
 );
 
-schema.methods.isValidPassword = function (password) {
+schema.methods.isValidPassword = function isValidPassword(password) {
   return bcrypt.compareSync(password, this.passwordHash);
 };
 
-schema.methods.hashPassword = function (password) {
+schema.methods.hashPassword = function hashPassword(password) {
   return bcrypt.hashSync(password, 10);
 };
 
-schema.methods.generateJWT = function () {
+schema.methods.generateJWT = function generateJWT() {
   return jwt.sign(
     {
       email: this.email,
@@ -28,7 +28,7 @@ schema.methods.generateJWT = function () {
   );
 };
 
-schema.methods.toAuthJSON = function () {
+schema.methods.toAuthJSON = function toAuthJSON() {
   return {
     email: this.email,
     token: this.generateJWT(),
