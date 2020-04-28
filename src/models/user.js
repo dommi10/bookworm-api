@@ -5,16 +5,16 @@ import bcrypt from "bcryptjs";
 const schema = new mongoose.Schema(
   {
     email: { type: String, required: true, lowercase: true, index: true },
-    passordHash: { type: String, required: true },
+    passwordHash: { type: String, required: true },
   },
   { timestamps: true }
 );
 
-schema.methods.isValidPassword = function isValidPassword(password) {
-  return bcrypt.compareSync(password, this.passordHash);
+schema.methods.isValidPassword = function (password) {
+  return bcrypt.compareSync(password, this.passwordHash);
 };
 
-schema.methods.hashPassword = function hashPassword(password) {
+schema.methods.hashPassword = function (password) {
   return bcrypt.hashSync(password, 10);
 };
 

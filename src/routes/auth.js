@@ -7,7 +7,7 @@ router.post("/", (req, res) => {
   const { credentials } = req.body;
 
   User.findOne({ email: credentials.email }).then((user) => {
-    if (user && user.isValidPassord(credentials.password)) {
+    if (user && user.isValidPassword(credentials.password)) {
       res.status(200).json({ user: { email: user.email } });
     } else {
       res.status(400).json({ errors: { global: p } });
