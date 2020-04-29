@@ -2,9 +2,9 @@ import express from "express";
 import path from "path";
 import cors from "cors";
 import mongoose from "mongoose";
-import auth from "./routes/auth";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
+import auth from "./routes/auth";
 import users from "./routes/users";
 
 dotenv.config();
@@ -26,4 +26,5 @@ app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
+// eslint-disable-next-line no-console
 app.listen(8000, () => console.log("runing on localhost:8000"));
