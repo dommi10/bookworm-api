@@ -4,16 +4,16 @@ const from = "'Bookworm' <info@bookworm.com>";
 
 function setUp() {
   return nodemailer.createTransport({
-    host: "smtp.mailtrap.io",
-    port: 2525,
+    host: process.env.EMAIL_HOST,
+    port: process.env.EMAIL_PORT,
     auth: {
-      user: "b2b12c43ac5eb9",
-      pass: "30285c24cf9187",
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
     },
   });
 }
 
- function sendConfirmationEmail(user) {
+function sendConfirmationEmail(user) {
   const transport = setUp();
   const email = {
     from,
@@ -22,11 +22,11 @@ function setUp() {
     text: `
         Welcome to Bookworm. Please, confirm your email,
         
-        ${user.generateConfirmationUrl}
+        ${user.generateConfirmationUrl()}
         `,
   };
 
   transport.sendMail(email);
 }
 
-export default sendConfirmationEmail; 
+export default sendConfirmationEmail;
