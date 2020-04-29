@@ -3,7 +3,6 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import uniqueValidator from "mongoose-unique-validator";
 
-// TODO: adduniqueness and email validations to email field
 const schema = new mongoose.Schema(
   {
     email: {
@@ -16,6 +15,7 @@ const schema = new mongoose.Schema(
     passwordHash: { type: String, required: true },
     confirmed: { type: Boolean, default: false },
     confirmationToken: { type: String, default: "" },
+    resetPasswordToken: { type: String, default: "" },
   },
   { timestamps: true }
 );
@@ -38,12 +38,28 @@ schema.methods.generateJWT = function generateJWT() {
   );
 };
 
+schema.methods.generateExpiredJWT = function generateExpiredJWT() {
+  return jwt.sign(
+    {
+      id: this._id,
+    },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: "1h",
+    }
+  );
+};
+
 schema.methods.setConfirmationToken = function setConfirmationToken() {
   this.confirmationToken = this.generateJWT();
 };
 
 schema.methods.generateConfirmationUrl = function generateConfirmationUrl() {
   return `${process.env.HOST}/confirmation/${this.confirmationToken}`;
+};
+
+schema.methods.generateResetPasswordEmail = function generateResetPasswordEmail() {
+  return `${process.env.HOST}/resetPassword/${this.generateExpiredJWT()}`;
 };
 
 schema.methods.toAuthJSON = function toAuthJSON() {
