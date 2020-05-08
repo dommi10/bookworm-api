@@ -17,7 +17,9 @@
     "lodash": "^4.17.15",
     "mongoose": "^5.9.10",
     "mongoose-unique-validator": "^2.0.3",
-    "nodemailer": "^6.4.6"
+    "nodemailer": "^6.4.6",
+    "request-promise": "^4.2.5",
+    "xml2js": "^0.4.23"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
