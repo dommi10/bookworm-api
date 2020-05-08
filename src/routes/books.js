@@ -1,6 +1,8 @@
 import express from "express";
+import authenticate from "../middlewares/authenticate";
 
 const route = express.Router();
+route.use(authenticate);
 
 route.get("/search", (_, res) => {
   res.status(200).json({
