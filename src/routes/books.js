@@ -42,10 +42,14 @@ route.get("/fetchPages", (req, res) => {
       parseString(result, (err, goodResult) => {
         if (err) {
           res.status(403).json({ errors: { global: "something went wrong" } });
-        } else
+        } else {
+          const number = goodResult.GoodreadsResponse.book[0].num_pages[0];
+          const pages = number ? parseInt(number, 10) : 0;
+
           res.json({
-            pages: goodResult.GoodreadsResponse.book[0].num_pages[0],
+            pages,
           });
+        }
       })
     );
 });
