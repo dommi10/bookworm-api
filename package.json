@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon --exec babel-node -- src/index.js",
+    "start": "nodemon --exec src/index.js",
     "lint": "eslint src"
   },
   "dependencies": {
@@ -23,6 +23,8 @@
     "xml2js": "^0.4.23"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-object-rest-spread": "^7.9.6",
+    "babel": "^7.9.6",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^10.1.0",
     "babel-preset-env": "^1.7.0",

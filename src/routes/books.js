@@ -2,9 +2,31 @@ import express from "express";
 import request from "request-promise";
 import { parseString } from "xml2js";
 import authenticate from "../middlewares/authenticate";
+import Book from "../models/book";
+import parseErrors from "../utils/parseErrors";
 
 const route = express.Router();
 route.use(authenticate);
+
+route.get("/", (req, res) => {
+  Book.find({ userId: req.currentUser._id })
+    .then((books) => {
+      res.json({ books });
+    })
+    .catch((error) => {
+      res.status(400).json({ errors: parseErrors(error.errors) });
+    });
+});
+
+route.post("/", (req, res) => {
+  Book.create({ ...req.body.book, userId: req.currentUser._id })
+    .then((book) => {
+      res.json({ book });
+    })
+    .catch((error) => {
+      res.status(400).json({ errors: parseErrors(error.errors) });
+    });
+});
 
 route.get("/search", (req, res) => {
   request
