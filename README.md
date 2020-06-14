@@ -20,8 +20,12 @@ You must provid your key on .env file
 
 Make sure, you have [yarn](https://yarnpkg.com/) installed before continue.
 
-
-run ***yarn*** on the terminal to add *packages* then run ***yarn start*** to start the server, the server address default it's ***http://localhost:3000***, it can be modify on .env file.
+## local development
+### scripts avaibles
+## yarn
+run ***yarn*** on the terminal to install *packages* 
+## yarn start
+run ***yarn start*** to start the server, the server address default it's ***http://localhost:3000***, it can be modify on .env file.
 
 
 # GOOD LUCK!
